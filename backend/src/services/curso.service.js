@@ -44,7 +44,9 @@ async function listarCursosDisponiveis(usuarioId, filtro) {
     descricao: curso.descricao,
     capa: curso.capa,
     inscricoes: curso.getDataValue('total_inscricoes'),
-    inicio: new Date(curso.inicio).toLocaleDateString('pt-BR'),
+    inicio: new Date(
+      new Date(curso.inicio).getTime() + (new Date().getTimezoneOffset() * 60000)
+    ).toLocaleDateString('pt-BR'),
     inscrito: curso.getDataValue('usuario_inscrito') > 0
   }))
 }
